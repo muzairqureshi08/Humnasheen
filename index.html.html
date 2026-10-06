@@ -1,0 +1,267 @@
+<title>Humnasheen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Outfit:wght@300;400;500;600&display=swap">
+<style>
+/* Layout: soft blush morning light, a few drifting petals and hearts. Heart intro opens on click, then one centered column of verses on white cards. */
+:root{
+  --blush:#fbe7ec;
+  --peach:#fde9df;
+  --lilac:#efe3f4;
+  --ink:#4a2338;
+  --soft:#8a6175;
+  --rose:#c9577e;
+  --rose-2:#e48aa8;
+  --gold:#c99a5b;
+  --card:rgba(255,255,255,.78);
+  --line:rgba(201,87,126,.18);
+  --f-display:"Marcellus", "Trajan Pro", Georgia, serif;
+  --f-body:"Outfit", "Avenir Next", system-ui, sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{background:var(--blush);color:var(--ink)}
+body{
+  font-family:var(--f-body);
+  font-weight:300;
+  font-size:18px;
+  line-height:1.8;
+  padding-inline:20px;
+  padding-block:0;
+  overflow-x:hidden;
+}
+
+/* ---------- Background ---------- */
+.bg{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;
+  background:linear-gradient(160deg,var(--peach) 0%,var(--blush) 45%,var(--lilac) 100%)}
+.blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:.7}
+.b1{width:55vmax;height:55vmax;left:-18vmax;top:-18vmax;background:radial-gradient(circle,#f9c6d4 0%,transparent 65%);animation:float1 20s ease-in-out infinite alternate}
+.b2{width:50vmax;height:50vmax;right:-18vmax;top:25vh;background:radial-gradient(circle,#fbd3c2 0%,transparent 65%);animation:float2 24s ease-in-out infinite alternate}
+.b3{width:50vmax;height:50vmax;left:15vw;bottom:-22vmax;background:radial-gradient(circle,#e3cdf0 0%,transparent 65%);animation:float3 28s ease-in-out infinite alternate}
+@keyframes float1{to{transform:translate(12vw,8vh) scale(1.1)}}
+@keyframes float2{to{transform:translate(-10vw,-6vh) scale(1.12)}}
+@keyframes float3{to{transform:translate(8vw,-10vh) scale(1.08)}}
+#sky{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+
+/* ---------- Intro ---------- */
+#intro{position:fixed;inset:0;z-index:20;display:grid;place-items:center;
+  background:radial-gradient(circle at 50% 45%,#fff4f6 0%,#fbe1e8 55%,#f1dcef 100%);
+  transition:opacity 1s ease,visibility 1s ease}
+#intro.gone{opacity:0;visibility:hidden}
+.intro-inner{display:grid;justify-items:center;gap:18px;padding:20px}
+.heart-btn{background:none;border:0;padding:0;margin:0;cursor:pointer;border-radius:30px;display:block;
+  animation:invite 1.8s ease-in-out 4.6s infinite}
+.heart-btn:focus-visible{outline:2px solid var(--rose);outline-offset:10px}
+@keyframes invite{0%,100%{transform:scale(1)}15%{transform:scale(1.06)}30%{transform:scale(1)}45%{transform:scale(1.04)}}
+#intro.opening .heart-btn{animation:burst .9s cubic-bezier(.5,0,.2,1) forwards}
+#intro.opening .intro-title,#intro.opening .intro-skip{transition:opacity .4s;opacity:0!important}
+@keyframes burst{0%{transform:scale(1);opacity:1}40%{transform:scale(.9)}100%{transform:scale(6);opacity:0}}
+.big-heart{width:min(78vw,360px);height:auto;overflow:visible;filter:drop-shadow(0 18px 40px rgba(201,87,126,.3))}
+.big-heart .outline{fill:none;stroke:var(--rose);stroke-width:1.2;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;animation:draw 2.4s cubic-bezier(.6,.1,.3,1) .3s forwards}
+.big-heart .fill{fill:url(#heartGrad);opacity:0;animation:bloom 1.2s ease 2.4s forwards}
+.mono{font-family:var(--f-display);fill:#fff;opacity:0;transform-box:fill-box;transform-origin:center}
+.mono.z{animation:letterIn 1s ease 3s forwards}
+.mono.u{animation:letterIn 1s ease 3.5s forwards}
+.mono.amp{fill:#fff3e6;animation:letterIn .8s ease 3.9s forwards}
+.intro-title{font-family:var(--f-display);letter-spacing:.45em;text-transform:uppercase;font-size:15px;color:var(--rose);opacity:0;padding-left:.45em;animation:rise 1s ease 4.2s forwards}
+.intro-skip{font-size:14px;color:var(--soft);letter-spacing:.12em;opacity:0;animation:rise 1s ease 4.8s forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes bloom{to{opacity:1}}
+@keyframes letterIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* ---------- Page ---------- */
+main{position:relative;z-index:1;max-width:680px;margin:0 auto;padding-block:72px 32px}
+.hero{display:grid;justify-items:center;text-align:center;gap:14px;padding-block:24px 48px}
+.small-heart{width:92px;height:auto;animation:beat 2.4s ease-in-out infinite;filter:drop-shadow(0 8px 20px rgba(201,87,126,.35))}
+@keyframes beat{0%,100%{transform:scale(1)}12%{transform:scale(1.08)}24%{transform:scale(1)}36%{transform:scale(1.05)}}
+.eyebrow{font-size:12px;font-weight:500;letter-spacing:.38em;text-transform:uppercase;color:var(--gold);padding-left:.38em}
+h1{font-family:var(--f-display);font-weight:400;font-size:clamp(46px,12vw,92px);line-height:1.05;letter-spacing:.04em;margin:4px 0 0;
+  background:linear-gradient(100deg,var(--rose) 10%,var(--rose-2) 55%,var(--gold) 95%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.dedication{display:grid;justify-items:center;gap:6px;margin:4px 0 6px;max-width:34ch}
+.dedication p{margin:0;text-wrap:balance}
+.ded-heart{font-size:22px;line-height:1;color:var(--rose)}
+.ded-for{font-size:12px;font-weight:500;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);padding-left:.3em}
+.ded-main{font-family:var(--f-display);font-size:clamp(24px,6vw,32px);line-height:1.3;color:var(--rose);margin-top:4px}
+.ded-line{font-size:clamp(16px,4.2vw,19px);font-weight:400;line-height:1.7;color:var(--soft)}
+.lede{font-size:clamp(18px,4.5vw,22px);font-weight:400;line-height:1.7;color:var(--ink);max-width:32ch;margin:8px 0 0;text-wrap:balance}
+.ornament{display:flex;align-items:center;gap:12px;color:var(--rose-2);width:min(260px,70%);margin-top:14px}
+.ornament::before,.ornament::after{content:"";flex:1;height:1px;background:var(--line)}
+
+.verses{display:grid;gap:26px;padding-block:16px}
+.verse{text-align:center;display:grid;justify-items:center;gap:10px;position:relative;
+  padding:32px 26px;border-radius:22px;background:var(--card);
+  border:1px solid rgba(255,255,255,.9);
+  box-shadow:0 14px 40px rgba(201,87,126,.12),0 2px 6px rgba(201,87,126,.06);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.verse .em{font-size:28px;line-height:1}
+.verse p{margin:0;font-size:clamp(17px,4.3vw,20px);font-weight:400;max-width:36ch;text-wrap:pretty;color:var(--ink)}
+.verse p strong{font-weight:600;color:var(--rose)}
+.verse:nth-child(even) p strong{color:var(--gold)}
+@supports (animation-timeline: view()){
+  .verse{animation:verseIn linear both;animation-timeline:view();animation-range:entry 0% cover 30%}
+  @keyframes verseIn{from{transform:translateY(22px) scale(.98)}to{transform:none}}
+}
+
+.pull{margin:48px auto 0;padding:28px 20px;text-align:center;max-width:560px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.pull p{font-family:var(--f-display);font-size:clamp(24px,6vw,34px);line-height:1.35;color:var(--rose);margin:0;text-wrap:balance}
+
+/* ---------- Letter ---------- */
+.letter{margin:64px auto 0;max-width:580px;text-align:center;display:grid;justify-items:center;gap:18px;
+  padding:48px 24px 40px;border-radius:220px 220px 24px 24px;
+  background:linear-gradient(180deg,#fff 0%,#fff6f8 100%);border:1px solid rgba(201,87,126,.15);
+  box-shadow:0 22px 55px rgba(201,87,126,.16)}
+.letter .eyebrow{color:var(--rose)}
+.letter h2{font-family:var(--f-display);font-weight:400;font-size:clamp(32px,8vw,48px);line-height:1.15;margin:0;color:var(--ink);letter-spacing:.03em}
+.letter ul{list-style:none;margin:0;padding:0;display:grid;gap:16px}
+.letter li{font-size:clamp(17px,4.3vw,20px);font-weight:400;color:var(--ink);text-wrap:balance}
+.sign{font-family:var(--f-display);font-size:34px;letter-spacing:.12em;color:var(--rose);line-height:1;margin-top:6px}
+
+footer{position:relative;z-index:1;text-align:center;padding-block:48px 44px;display:grid;justify-items:center;gap:16px}
+.replay{font-family:var(--f-body);font-size:13px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;background:rgba(255,255,255,.6);color:var(--rose);
+  border:1px solid var(--line);padding:12px 24px;border-radius:999px;cursor:pointer;transition:background .3s,border-color .3s}
+.replay:hover{background:#fff;border-color:var(--rose-2)}
+.credit{font-size:14px;color:var(--soft);letter-spacing:.04em}
+.credit a{color:var(--rose);text-decoration:none;font-weight:500;border-bottom:1px solid var(--line);padding-bottom:1px;transition:color .3s,border-color .3s}
+.credit a:hover{color:var(--gold);border-color:var(--gold)}
+.replay:focus-visible,.credit a:focus-visible{outline:2px solid var(--rose);outline-offset:4px}
+
+@media (max-width:480px){.verse{padding:24px 18px}}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-delay:0s!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+</style>
+
+<div class="bg" aria-hidden="true">
+  <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+</div>
+<canvas id="sky" aria-hidden="true"></canvas>
+
+<div id="intro">
+  <div class="intro-inner">
+    <button class="heart-btn" type="button" aria-label="Open the website">
+    <svg class="big-heart" viewBox="0 0 100 92" aria-hidden="true">
+      <defs>
+        <linearGradient id="heartGrad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#f4a3bb"/>
+          <stop offset="55%" stop-color="#e06f95"/>
+          <stop offset="100%" stop-color="#c9577e"/>
+        </linearGradient>
+      </defs>
+      <path class="fill" d="M50 86C22 66 6 48 6 30C6 16 16 6 29 6C38 6 45 11 50 19C55 11 62 6 71 6C84 6 94 16 94 30C94 48 78 66 50 86Z"/>
+      <path class="outline" pathLength="1" d="M50 86C22 66 6 48 6 30C6 16 16 6 29 6C38 6 45 11 50 19C55 11 62 6 71 6C84 6 94 16 94 30C94 48 78 66 50 86Z"/>
+      <text class="mono z" x="31" y="51" font-size="24" text-anchor="middle">Z</text>
+      <text class="mono amp" x="50" y="48" font-size="9" text-anchor="middle">&amp;</text>
+      <text class="mono u" x="69" y="51" font-size="24" text-anchor="middle">U</text>
+    </svg>
+    </button>
+    <div class="intro-title">Humnasheen</div>
+    <div class="intro-skip">Click the heart to open ♡</div>
+  </div>
+</div>
+
+<main>
+  <header class="hero">
+    <svg class="small-heart" viewBox="0 0 100 92" aria-label="Heart with Z and U">
+      <path d="M50 86C22 66 6 48 6 30C6 16 16 6 29 6C38 6 45 11 50 19C55 11 62 6 71 6C84 6 94 16 94 30C94 48 78 66 50 86Z" fill="url(#heartGrad)"/>
+      <text x="32" y="51" font-size="24" text-anchor="middle" fill="#ffffff" font-family="Marcellus, Georgia, serif">Z</text>
+      <text x="68" y="51" font-size="24" text-anchor="middle" fill="#ffffff" font-family="Marcellus, Georgia, serif">U</text>
+    </svg>
+    <div class="eyebrow">A letter of love</div>
+    <h1>Humnasheen</h1>
+    <div class="dedication">
+      <span class="ded-heart">♡</span>
+      <p class="ded-for">For the one who feels like home</p>
+      <p class="ded-main">Tum ho, toh sab haseen hai.</p>
+      <p class="ded-line">Tum meri zindagi ka woh haseen hissa ho, jise main har dua mein phir se maangta hoon.</p>
+    </div>
+    <div class="ornament"><span>✦</span></div>
+  </header>
+
+  <section class="verses">
+    <div class="verse"><span class="em">🌙</span>
+      <p>In this life, I met many people, but <strong>I chose you as my Humnasheen.</strong></p></div>
+    <div class="verse"><span class="em">👀</span>
+      <p>I chose you because <strong>you see me when the world overlooks me,</strong> you understand my silence, and you stand beside me not only in happiness but also in difficult days.</p></div>
+    <div class="verse"><span class="em">❤️</span>
+      <p>I chose you because <strong>you love me sincerely,</strong> without conditions or pretence. Life is given only once, and I want to live every moment of it with you.</p></div>
+    <div class="verse"><span class="em">🤍</span>
+      <p>I am blessed to have someone who truly loves me, and it is my promise to <strong>love you back with the same depth, honesty, and loyalty.</strong></p></div>
+    <div class="verse"><span class="em">💞</span>
+      <p>I will love you beyond words… stand with you in pain, celebrate with you in joy, and <strong>become your peace when the world feels heavy.</strong></p></div>
+    <div class="verse"><span class="em">🌧️</span>
+      <p>Because our love is not only about easy moments, it is about <strong>staying together when everything becomes hard.</strong></p></div>
+    <div class="verse"><span class="em">🏡</span>
+      <p>You are not just my partner… you have become <strong>my home, my comfort, and my strength.</strong></p></div>
+    <div class="verse"><span class="em">💖</span>
+      <p>I have found that kind of love in you, and I will <strong>hold it tightly, respect it, and protect it</strong> because not everyone is fortunate enough to experience something so real.</p></div>
+  </section>
+
+  <div class="pull"><p>You are my home, my comfort, my strength.</p></div>
+
+  <section class="letter" aria-label="For you">
+    <div class="eyebrow">Sirf tumhare liye</div>
+    <h2>Meri Humnasheen</h2>
+    <ul>
+      <li>Tum meri zindagi ka sab se haseen shakhs ho ❤️</li>
+      <li>Tum ne mujhe sikhaya ke mohabbat asal mein kya hoti hai</li>
+      <li>Duniya ki bheer mein bhi tum ne mujhe dekha, meri khamoshi ko samjha</li>
+      <li>Har khushi aur har mushkil mein, main hamesha tumhare saath hoon</li>
+      <li>Tum mera ghar ho, mera sukoon ho, meri taaqat ho 🤍</li>
+    </ul>
+    <div class="sign">Z &amp; U</div>
+  </section>
+</main>
+
+<footer>
+  <button class="replay" id="replay" type="button">Replay intro ♡</button>
+  <div class="credit">Developed by <a href="https://uzairqureshi.com" target="_blank" rel="noopener">Uzair Qureshi</a></div>
+</footer>
+
+<script>
+(function(){
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- Intro: opens only when the heart is clicked ---------- */
+  var intro=document.getElementById('intro');
+  function open(){
+    if(intro.classList.contains('opening'))return;
+    intro.classList.add('opening');
+    setTimeout(function(){intro.classList.add('gone')},reduce?50:900);
+  }
+  function bind(){intro.querySelector('.heart-btn').addEventListener('click',open)}
+  bind();
+  document.getElementById('replay').addEventListener('click',function(){
+    var clone=intro.cloneNode(true);clone.classList.remove('gone','opening');
+    intro.parentNode.replaceChild(clone,intro);intro=clone;
+    bind();window.scrollTo(0,0);
+  });
+
+  /* ---------- Soft petals, hearts and sparkles ---------- */
+  var c=document.getElementById('sky'),x=c.getContext('2d'),w,h,dpr,hearts=[],petals=[],sparks=[];
+  function R(a,b){return a+Math.random()*(b-a)}
+  function size(){
+    dpr=Math.min(window.devicePixelRatio||1,2);w=c.clientWidth;h=c.clientHeight;
+    c.width=w*dpr;c.height=h*dpr;x.setTransform(dpr,0,0,dpr,0,0);
+    hearts=[];for(var j=0;j<Math.max(5,Math.round(w/150));j++)hearts.push(newHeart(true));
+    petals=[];for(var k=0;k<Math.max(6,Math.round(w/130));k++)petals.push(newPetal(true));
+    sparks=[];for(var s=0;s<Math.max(14,Math.round(w/70));s++)sparks.push({x:R(0,w),y:R(0,h),r:R(.8,2),p:R(0,6.28),sp:R(.6,1.6)});
+  }
+  function newHeart(any){return {x:R(0,w),y:any?R(0,h):h+20,s:R(6,14),v:R(.15,.4),d:R(0,6.28),a:R(.12,.28),c:Math.random()<.6?'228,138,168':'201,154,91'}}
+  function newPetal(any){return {x:R(0,w),y:any?R(-h,h):R(-60,-10),s:R(6,10),vy:R(.35,.8),vx:R(-.25,.25),rot:R(0,6.28),vr:R(-.015,.015),sw:R(0,6.28),c:['#f4a3bb','#f7c1d0','#eb8fae','#f9d2c3'][Math.floor(R(0,4))]}}
+  function heart(cx,cy,s){x.beginPath();x.moveTo(cx,cy+s*.35);x.bezierCurveTo(cx-s*1.1,cy-s*.35,cx-s*.55,cy-s*1.05,cx,cy-s*.5);x.bezierCurveTo(cx+s*.55,cy-s*1.05,cx+s*1.1,cy-s*.35,cx,cy+s*.35);x.fill()}
+  function petal(p){x.save();x.translate(p.x,p.y);x.rotate(p.rot);x.scale(1,.6+.4*Math.sin(p.sw));x.fillStyle=p.c;x.globalAlpha=.6;
+    x.beginPath();x.moveTo(0,-p.s);x.bezierCurveTo(p.s*.9,-p.s*.6,p.s*.7,p.s*.7,0,p.s);x.bezierCurveTo(-p.s*.7,p.s*.7,-p.s*.9,-p.s*.6,0,-p.s);x.fill();x.restore()}
+  var t=0;
+  function frame(){
+    t+=.016;x.clearRect(0,0,w,h);
+    for(var s=0;s<sparks.length;s++){var sp=sparks[s];var a=.15+.5*Math.abs(Math.sin(t*sp.sp+sp.p));
+      var g=x.createRadialGradient(sp.x,sp.y,0,sp.x,sp.y,sp.r*5);g.addColorStop(0,'rgba(255,255,255,'+a+')');g.addColorStop(1,'rgba(255,255,255,0)');
+      x.fillStyle=g;x.beginPath();x.arc(sp.x,sp.y,sp.r*5,0,6.28);x.fill()}
+    for(var j=0;j<hearts.length;j++){var hh=hearts[j];hh.y-=hh.v;hh.d+=.01;x.fillStyle='rgba('+hh.c+','+hh.a+')';heart(hh.x+Math.sin(hh.d)*14,hh.y,hh.s);if(hh.y<-30)hearts[j]=newHeart(false)}
+    for(var k=0;k<petals.length;k++){var pt=petals[k];pt.y+=pt.vy;pt.sw+=.035;pt.x+=pt.vx+Math.sin(pt.sw)*.5;pt.rot+=pt.vr;petal(pt);if(pt.y>h+20)petals[k]=newPetal(false)}
+    if(!reduce)requestAnimationFrame(frame);
+  }
+  size();window.addEventListener('resize',size);frame();
+})();
+</script>
